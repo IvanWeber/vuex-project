@@ -1,11 +1,24 @@
 <template>
-  
+  <div class="post" v-for="post in posts" :key="post.id">
+    <h2>{{post.title}}</h2>
+    <p>{{post.body}}</p>
+  </div>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      posts: []
+    }
+  },
+  async mounted() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+    const posts = await res.json();
+    this.posts = posts;
+  }
 }
 </script>
 
@@ -16,6 +29,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/ 
+  margin: 60px auto;
+  width: 400px;
+}
+
+.post {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 </style>
