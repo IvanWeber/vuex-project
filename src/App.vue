@@ -1,7 +1,7 @@
 <template>
   <PostForm />
   <h1>{{postsCount}}</h1>
-  <div class="post" v-for="post in allPosts" :key="post.id">
+  <div class="post" v-for="post in validPosts" :key="post.id">
     <h2>{{post.title}}</h2>
     <p>{{post.body}}</p>
     <Notes />
@@ -29,7 +29,7 @@ export default {
   //     return this.$store.getters.allPosts;
   //   }
   // },
-  computed: mapGetters(['allPosts', 'postsCount']),
+  computed: mapGetters(['validPosts', 'postsCount']),
   methods: mapActions(['fetchPosts']),
   async mounted() {
     // const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
