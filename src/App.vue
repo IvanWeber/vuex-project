@@ -1,5 +1,6 @@
 <template>
   <div class="post" v-for="post in allPosts" :key="post.id">
+    <h1>{{postsCount}}</h1>
     <h2>{{post.title}}</h2>
     <p>{{post.body}}</p>
     <Notes />
@@ -8,7 +9,7 @@
 
 <script>
 import Notes from "./components/Notes";
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'App',
@@ -25,12 +26,16 @@ export default {
   //     return this.$store.getters.allPosts;
   //   }
   // },
-  computed: mapGetters(['allPosts']),
+  computed: mapGetters(['allPosts', 'postsCount']),
+  methods: mapActions(['fetchPosts']),
   async mounted() {
     // const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
     // const posts = await res.json();
     // this.posts = posts;
-    this.$store.dispatch("fetchPosts")
+
+    // this.$store.dispatch("fetchPosts")
+
+    this.fetchPosts()
   }
 }
 </script>
