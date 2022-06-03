@@ -1,23 +1,36 @@
 <template>
-  <div class="post" v-for="post in posts" :key="post.id">
+  <div class="post" v-for="post in allPosts" :key="post.id">
     <h2>{{post.title}}</h2>
     <p>{{post.body}}</p>
+    <Notes />
   </div>
 </template>
 
 <script>
+import Notes from "./components/Notes";
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
-  data () {
-    return {
-      posts: []
-    }
+  components: {
+    Notes,
   },
+  // data () {
+  //   return {
+  //     posts: []
+  //   }
+  // },
+  // computed: {
+  //   allPosts() {
+  //     return this.$store.getters.allPosts;
+  //   }
+  // },
+  computed: mapGetters(['allPosts']),
   async mounted() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
-    const posts = await res.json();
-    this.posts = posts;
+    // const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+    // const posts = await res.json();
+    // this.posts = posts;
+    this.$store.dispatch("fetchPosts")
   }
 }
 </script>
