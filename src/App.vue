@@ -1,6 +1,7 @@
 <template>
+  <PostForm />
+  <h1>{{postsCount}}</h1>
   <div class="post" v-for="post in allPosts" :key="post.id">
-    <h1>{{postsCount}}</h1>
     <h2>{{post.title}}</h2>
     <p>{{post.body}}</p>
     <Notes />
@@ -10,11 +11,13 @@
 <script>
 import Notes from "./components/Notes";
 import {mapGetters, mapActions} from 'vuex'
+import PostForm from './components/PostForm'
 
 export default {
   name: 'App',
   components: {
     Notes,
+    PostForm,
   },
   // data () {
   //   return {
