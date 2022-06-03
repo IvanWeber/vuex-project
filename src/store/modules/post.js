@@ -1,11 +1,16 @@
 export default {
     actions:{
-        async fetchPosts(ctx, limit = 3) {
+        async fetchPosts({commit, getters, dispatch}, limit = 3) {
             const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=' + limit);
             const posts = await res.json();
             // this.posts = posts;
 
-            ctx.commit('updatePosts', posts)
+            dispatch('sayHello')
+
+            commit('updatePosts', posts)
+        },
+        sayHello() {
+            
         }
     },
     mutations:{
